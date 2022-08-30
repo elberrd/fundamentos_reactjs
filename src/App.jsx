@@ -10,7 +10,7 @@ const posts = [
   {
     id: 1,
     author: {
-      avatarUrl: "https:github.com/rafaela.png",
+      avatarUrl: "https://avatars.githubusercontent.com/u/508504?v=4",
       name: "Julio Alcantara",
       role: "Developer",
     },
@@ -28,7 +28,7 @@ const posts = [
   {
     id: 2,
     author: {
-      avatarUrl: "https:github.com/elberrd.png",
+      avatarUrl: "https://avatars.githubusercontent.com/u/8150723?v=4",
       name: "Elber Domingos",
       role: "Founder & CEO",
     },
