@@ -9,6 +9,8 @@ import { useState } from "react";
 export function Post({ author, content, publishedAt }) {
   const [comments, setComments] = useState([]);
 
+  const [newCommentText, setNewCommentText] = useState("");
+
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'às' HH:mm'h'",
@@ -22,10 +24,13 @@ export function Post({ author, content, publishedAt }) {
 
   function handleCreateNewComment() {
     event.preventDefault();
-    const newComment = event.target.commentTextArea.value;
-    setComments([...comments, newComment]);
 
-    event.target.commentTextArea.value = "";
+    setComments([...comments, newCommentText]);
+    setNewCommentText("");
+  }
+
+  function handleNewCommentChange() {
+    setNewCommentText(event.target.value);
   }
 
   return (
@@ -50,11 +55,11 @@ export function Post({ author, content, publishedAt }) {
         {content.map((item) => {
           switch (item.type) {
             case "paragraph":
-              return <p key={item.id}>{item.content}</p>;
+              return <p key={item.content}>{item.content}</p>;
             case "link":
               return (
-                <p>
-                  <a key={item.id} href={item.content}>
+                <p key={item.content}>
+                  <a key={item.content} href="#">
                     {item.content}
                   </a>
                 </p>
@@ -67,14 +72,19 @@ export function Post({ author, content, publishedAt }) {
 
       <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe aqui seu cometario</strong>
-        <textarea name="commentTextArea" placeholder="Deixe um comentario" />
+        <textarea
+          name="commentTextArea"
+          placeholder="Deixe um comentario"
+          value={newCommentText}
+          onChange={handleNewCommentChange}
+        />
         <footer>
           <button type="submit">Publicar</button>
         </footer>
       </form>
       <div className={styles.commentList}>
         {comments.map((comment) => (
-          <Comment content={comment} />
+          <Comment key={comment} content={comment} />
         ))}
       </div>
     </article>
