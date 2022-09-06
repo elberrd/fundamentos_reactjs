@@ -9,6 +9,7 @@ import { useState } from "react";
 export function Post({ author, content, publishedAt }) {
   const [comments, setComments] = useState([]);
 
+  // Armazena tudo que e digitado no textarea do comentário
   const [newCommentText, setNewCommentText] = useState("");
 
   const publishedDateFormatted = format(
@@ -30,7 +31,12 @@ export function Post({ author, content, publishedAt }) {
   }
 
   function handleNewCommentChange() {
+    event.target.setCustomValidity("");
     setNewCommentText(event.target.value);
+  }
+
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity("Este campo é obrigatório");
   }
 
   function deleteComment(index) {
@@ -40,6 +46,8 @@ export function Post({ author, content, publishedAt }) {
 
     setComments(commentsWithoutDeleted);
   }
+
+  const isNewCommentInvalid = newCommentText.trim().length === 0;
 
   return (
     <article className={styles.post}>
@@ -85,10 +93,13 @@ export function Post({ author, content, publishedAt }) {
           placeholder="Deixe um comentario"
           value={newCommentText}
           onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
           required
         />
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={isNewCommentInvalid}>
+            Publicar
+          </button>
         </footer>
       </form>
       <div className={styles.commentList}>
