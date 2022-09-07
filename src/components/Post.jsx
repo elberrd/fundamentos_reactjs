@@ -62,7 +62,7 @@ export function Post({ author, content, publishedAt }) {
 
         <time
           title={publishedDateFormatted}
-          dateTime={publishedAt.toISOString()}
+          dateTime={publishedAt}
         >
           {publishedDateRelativeToNow}
         </time>
