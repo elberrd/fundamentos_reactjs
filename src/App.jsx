@@ -23,7 +23,7 @@ const posts = [
       },
       { type: "link", content: "jane.design/doctorcare" },
     ],
-    publishedAt: new Date.now(),
+    publishedAt: Date.now(),
   },
   {
     id: 2,
@@ -41,7 +41,7 @@ const posts = [
       },
       { type: "link", content: "elber.domingos/CEO" },
     ],
-    publishedAt: new Date.now(),
+    publishedAt: Date.now(),
   },
 ];
 
